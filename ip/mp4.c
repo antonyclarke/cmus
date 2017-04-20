@@ -489,6 +489,9 @@ static int mp4_read_comments(struct input_plugin_data *ip_data,
 		char buf[6];
 		snprintf(buf, 6, "%u", *tags->tempo);
 		comments_add_const(&c, "bpm", buf);
+    }
+	if (tags->encodedBy) {
+		comments_add_const(&c, "encodedby", tags->encodedBy);
 	}
 
 	MP4TagsFree(tags);
