@@ -499,7 +499,8 @@ static int mp4_read_comments(struct input_plugin_data *ip_data,
 		char *rating_str;
 		rating_str = xnew(char, 16);
 		int rating = atoi(popTags->elements[0].dataList.elements[0].value);
-		translate_popm(&rating, rating_str);
+		unsigned char capped_rating = rating > 255 ? 255 : rating;
+		translate_popm(&capped_rating, rating_str);
 		comments_add_const(&c, "popularimeter", rating_str);
 	}
 

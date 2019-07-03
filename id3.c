@@ -982,7 +982,7 @@ static void decode_ufid(struct id3tag *id3, const char *buf, int len)
 	add_v2(id3, ID3_MUSICBRAINZ_TRACKID, ufid);
 }
 
-void translate_popm(int *rating, char *rating_str)
+void translate_popm(const unsigned char *rating, char *rating_str)
 {
 	if (*rating > 0 && *rating < 64)
 		strncpy(rating_str, "★", 4);
@@ -1001,14 +1001,14 @@ void translate_popm(int *rating, char *rating_str)
 static void decode_popm(struct id3tag *id3, const char *buf, int len)
 {
 	char *popm;
-	int popm_len = len - 4 - 1 - 1;
+	int popm_len = strlen(buf);
 
 	popm = xnew(char, popm_len);
 	memcpy(popm, buf, popm_len);
 	popm[popm_len] = '\0';
 
-	int *rating;
-	rating = xnew(int, 1);
+	unsigned char *rating;
+	rating = xnew(unsigned char, 1);
 	memcpy(rating, buf + popm_len + 1, 1);
 	id3_debug("%s: %d\n", popm, *rating);
 
