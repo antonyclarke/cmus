@@ -988,9 +988,9 @@ void translate_popm(int *rating, char *rating_str)
 		strncpy(rating_str, "★", 4);
 	else if (*rating >= 64 && *rating < 128)
 		strncpy(rating_str, "★★", 7);
-	else if (*rating >= 128 && *rating < 196)
+	else if (*rating >= 128 && *rating < 192)
 		strncpy(rating_str, "★★★", 10);
-	else if (*rating >= 196 && *rating < 255)
+	else if (*rating >= 192 && *rating < 255)
 		strncpy(rating_str, "★★★★", 13);
 	else if (*rating == 255)
 		strncpy(rating_str, "★★★★★", 16);
